@@ -12,13 +12,11 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Install HF CLI
+      - name: Install the hf CLI
         run: |
           curl -LsSf https://hf.co/cli/install.sh | bash
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - name: Push to Hub
         env:
           HF_OIDC_RESOURCE: bekicot13/Edit
-        run: hf upload bekicot13/Edit . --commit-message "Sync from GitHub"
+        run: hf upload bekicot13/Edit . --exclude ".github*" --commit-message "Sync from GitHub"
